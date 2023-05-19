@@ -18,10 +18,8 @@ WHERE id = 1*|DML|
 |COUNT|Количество строк (записей)|*SELECT COUNT(id) FROM public.sweets - WHERE weight = '300'*|DML|
 |WHERE|Условие фильтрации записей при выборе данных|*SELECT name FROM public.sweets - WHERE cost = '100'*|DML|
 |LIKE|Поиск значения по совпадению с выражением в столбце. *С оператором LIKE используются два подстановочных знака: % - любое количество символов*|SELECT * FROM public.sweets - WHERE name LIKE 'М%'|DML|
-|AND, OR, BETWEEN|Оператор «И», «Или», «Между»|*SELECT name FROM public.sweets
-WHERE cost = '100' AND weight = '100'*|DML|
-|ORDER BY ASC, DESC|Сортировка в порядке возрастания (asc) или убывания (desc).
-ASC можно не указывать|*SELECT * FROM public.sweets - ORDER BY name DESC*|DML|
+|AND, OR, BETWEEN|Оператор «И», «Или», «Между»|*SELECT name FROM public.sweets - WHERE cost = '100' AND weight = '100'*|DML|
+|ORDER BY ASC, DESC|Сортировка в порядке возрастания (asc) или убывания (desc). ASC можно не указывать|*SELECT * FROM public.sweets - ORDER BY name DESC*|DML|
 |GROUP BY| Группировка столбцов| *SELECT sweets_types_id FROM public.sweets -GROUP BY sweets_types_id*|DML|
 |||DML|
 |||DML|
