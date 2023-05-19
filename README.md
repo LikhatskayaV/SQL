@@ -9,8 +9,7 @@ SQL (structured query language) - язык структурированных з
 |DROP|Удаление целиком таблицы из БД|*DROP TABLE public.sweets_types*|DDL|
 |TRUNCATE|Удаление всех записей из таблицы|*TRUNCATE TABLE public.sweets_types*|DDL|
 |INSERT|Добавление строки в таблицу|*INSERT INTO public.sweets_types(name) - VALUES('вафли'),('конфеты')*|DML|
-|UPDATE|Обновление данных строки в таблице|*UPDATE public.sweets_types - SET name = 'вафли новые'
-WHERE id = 1*|DML|
+|UPDATE|Обновление данных строки в таблице|*UPDATE public.sweets_types - SET name = 'вафли новые' - WHERE id = 1*|DML|
 |DELETE|Удаление строки из таблицы|*DELETE FROM public.sweets_types - WHERE name = 'вафли'*|DML|
 |SELECT|Просмотр данных из таблицы|SELECT * FROM public.sweets_types; SELECT name FROM public.sweets_types;|DML|
 |**Другие операторы, которые можно использовать с DML (работа с данными).**| **операторы условия, группировки, сортировки, объединения и агрегатные функции**|SELECT 'что' FROM 'из какой таблицы' -JOIN 'с другой таблицей' -WHERE 'условие' -ORDER BY 'сортировка' -SELECT 'что' FROM 'из какой таблицы' -JOIN 'с другой таблицей' -GROUP BY 'группировка'  -HAVING 'условие' |DML|
@@ -21,24 +20,9 @@ WHERE id = 1*|DML|
 |AND, OR, BETWEEN|Оператор «И», «Или», «Между»|*SELECT name FROM public.sweets - WHERE cost = '100' AND weight = '100'*|DML|
 |ORDER BY ASC, DESC|Сортировка в порядке возрастания (asc) или убывания (desc). ASC можно не указывать|*SELECT * FROM public.sweets - ORDER BY name DESC*|DML|
 |GROUP BY| Группировка столбцов| *SELECT sweets_types_id FROM public.sweets -GROUP BY sweets_types_id*|DML|
-|HAVING|Используется для фильтрации по условию, когда есть группировка| SELECT s.name FROM public.storehouses s - LEFT JOIN public.manufacturers_storehouses ms ON s.id = ms.storehouses_id - LEFT JOIN public.sweets sw ON sw.manufacturer_id = ms.manufacturers_id  GROUP BY s.name HAVING COUNT (sw.id) > 8;
-Сначала сгруппируем сладости по складам, а затем через условие HAVING найдем те, у которых количество сладостей больше 8|DML|
-|SUM, MAX, MIN, AVG|Сумма значений, максимальное, минимальное, среднее значение|SELECT SUM(id) FROM public.sweets; -SELECT MAX(id) FROM public.sweets; -SELECT MIN(id) FROM public.sweets; -SELECT AVG(id) FROM public.sweets; |DML|
-|JOIN или INNER JOIN, LEFT JOIN, RIGHT JOIN|Объединение двух таблиц|SELECT * FROM public.sweets - JOIN public.sweets_types st ON s.sweets_types_id = st.id
-WHERE st.name = 'шоколад'; |DML|
+|HAVING|Используется для фильтрации по условию, когда есть группировка| *SELECT s.name FROM public.storehouses s - LEFT JOIN public.manufacturers_storehouses ms ON s.id = ms.storehouses_id - LEFT JOIN public.sweets sw ON sw.manufacturer_id = ms.manufacturers_id  GROUP BY s.name HAVING COUNT (sw.id) > 8; Сначала сгруппируем сладости по складам, а затем через условие HAVING найдем те, у которых количество сладостей больше 8*|DML|
+|SUM, MAX, MIN, AVG|Сумма значений, максимальное, минимальное, среднее значение|*SELECT SUM(id) FROM public.sweets; -SELECT MAX(id) FROM public.sweets; -SELECT MIN(id) FROM public.sweets; -SELECT AVG(id) FROM public.sweets* |DML|
+|JOIN или INNER JOIN, LEFT JOIN, RIGHT JOIN|Объединение двух таблиц|*SELECT * FROM public.sweets - JOIN public.sweets_types st ON s.sweets_types_id = st.id -WHERE st.name = 'шоколад'* |DML|
 |UNION, UNION ALL|вертикальное обединение|UNION, UNION ALL|DML|
 
 
-JOIN или INNER JOIN, LEFT JOIN, RIGHT JOIN. Объединение двух таблиц.
-
-JOIN или INNER JOIN - возвращает записи, имеющие в обеих таблицах
-
-LEFT JOIN - возвращает все записи из левой таблицы и те, которые есть в левой и правой таблице
-
-RIGHT JOIN - возвращает все записи из правой таблицы и те, которые есть в правой таблице
-
-Подробная работа с JOIN описана в статье.
-
-SELECT * FROM public.sweets s
-JOIN public.sweets_types st ON s.sweets_types_id = st.id
-WHERE st.name = 'шоколад';
