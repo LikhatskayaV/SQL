@@ -21,7 +21,24 @@ WHERE id = 1*|DML|
 |AND, OR, BETWEEN|Оператор «И», «Или», «Между»|*SELECT name FROM public.sweets - WHERE cost = '100' AND weight = '100'*|DML|
 |ORDER BY ASC, DESC|Сортировка в порядке возрастания (asc) или убывания (desc). ASC можно не указывать|*SELECT * FROM public.sweets - ORDER BY name DESC*|DML|
 |GROUP BY| Группировка столбцов| *SELECT sweets_types_id FROM public.sweets -GROUP BY sweets_types_id*|DML|
-|||DML|
-|||DML|
-|||DML|
-|||DML|
+|HAVING|Используется для фильтрации по условию, когда есть группировка| SELECT s.name FROM public.storehouses s - LEFT JOIN public.manufacturers_storehouses ms ON s.id = ms.storehouses_id - LEFT JOIN public.sweets sw ON sw.manufacturer_id = ms.manufacturers_id  GROUP BY s.name HAVING COUNT (sw.id) > 8;
+Сначала сгруппируем сладости по складам, а затем через условие HAVING найдем те, у которых количество сладостей больше 8|DML|
+|SUM, MAX, MIN, AVG|Сумма значений, максимальное, минимальное, среднее значение|SELECT SUM(id) FROM public.sweets; -SELECT MAX(id) FROM public.sweets; -SELECT MIN(id) FROM public.sweets; -SELECT AVG(id) FROM public.sweets; |DML|
+|JOIN или INNER JOIN, LEFT JOIN, RIGHT JOIN|Объединение двух таблиц|SELECT * FROM public.sweets - JOIN public.sweets_types st ON s.sweets_types_id = st.id
+WHERE st.name = 'шоколад'; |DML|
+|UNION, UNION ALL|вертикальное обединение|UNION, UNION ALL|DML|
+
+
+JOIN или INNER JOIN, LEFT JOIN, RIGHT JOIN. Объединение двух таблиц.
+
+JOIN или INNER JOIN - возвращает записи, имеющие в обеих таблицах
+
+LEFT JOIN - возвращает все записи из левой таблицы и те, которые есть в левой и правой таблице
+
+RIGHT JOIN - возвращает все записи из правой таблицы и те, которые есть в правой таблице
+
+Подробная работа с JOIN описана в статье.
+
+SELECT * FROM public.sweets s
+JOIN public.sweets_types st ON s.sweets_types_id = st.id
+WHERE st.name = 'шоколад';
